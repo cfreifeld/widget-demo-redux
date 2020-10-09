@@ -21,6 +21,8 @@ const RawTextWidgetComponent = ({widget, dispatch}) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    // note the "or" expression: we must return something even if
+    // no widget has editing true
     widget: state.widgets.find(w => w.editing) || state.widgets[0]
   }
 }
