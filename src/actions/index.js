@@ -6,38 +6,38 @@ Array.prototype.move = function (from, to) {
 }
 
 let serverBaseUrl = 'https://wbdv-generic-server.herokuapp.com/api/ccf/widgets'
-export const deleteWidget = id => {
-  return (dispatch) => {
-    return axios.delete(`${serverBaseUrl}/id`
-    ).then(() => axios.get(serverBaseUrl))
-    .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
-  }
-  // return {
-  //   type: 'DELETE_WIDGET', id: id
-  // }
-}
+// export const deleteWidget = id => {
+//   return (dispatch) => {
+//     return axios.delete(`${serverBaseUrl}/id`
+//     ).then(() => axios.get(serverBaseUrl))
+//     .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
+//   }
+//   // return {
+//   //   type: 'DELETE_WIDGET', id: id
+//   // }
+// }
 let nextWidgetId = 0
-export const addWidget = (text) => {
-  return (dispatch) => {
-    return axios.post(
-        serverBaseUrl,
-        {
-          //type: 'ADD_WIDGET',
-          //id: nextWidgetId++,
-          text: text,
-          editing: false
-        }).then(
-        () => axios.get(
-            serverBaseUrl))
-        .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data})
-    )
-    //return {
-    //  type: 'ADD_WIDGET',
-    //  id: nextWidgetId++,
-    //  text: text
-    // }
-  }
-}
+// export const addWidget = (text) => {
+//   // return (dispatch) => {
+//   //   return axios.post(
+//   //       serverBaseUrl,
+//   //       {
+//   //         //type: 'ADD_WIDGET',
+//   //         //id: nextWidgetId++,
+//   //         text: text,
+//   //         editing: false
+//   //       }).then(
+//   //       () => axios.get(
+//   //           serverBaseUrl))
+//   //       .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data})
+//   //   )
+//     return {
+//      type: 'ADD_WIDGET',
+//      id: nextWidgetId++,
+//      text: text
+//     }
+//   //}
+// }
 export const moveUp = widget => {
   return {
     type: 'MOVE_UP', widget: widget

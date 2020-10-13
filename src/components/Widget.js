@@ -1,13 +1,15 @@
 import React from 'react'
-import {deleteWidget, moveUp, setWidgetType, toggleEditing} from "../actions";
+import {moveUp, setWidgetType, toggleEditing} from "../actions";
 import RawTextWidget from "./RawTextWidget";
+import axios from "axios";
+import {connect} from "react-redux";
 
-const Widget = ({widget, dispatch}) => {
+const WidgetComponent = ({widget, deleteWidget, moveUp, toggleEditing, setWidgetType}) => {
   let select, editing
   return (
       <li>{widget.text}
         <button onClick={() => {
-          dispatch(moveUp(widget))
+          moveUp(widget)
         }}>^
         </button>
         <label>
@@ -15,13 +17,13 @@ const Widget = ({widget, dispatch}) => {
                  type="checkbox"
                  value={widget.editing}
                  onChange={e => {
-                   dispatch(toggleEditing(widget._id, editing.checked))}}
+                   toggleEditing(widget._id, editing.checked)}}
                  checked={widget.editing}/> Editing
         </label>
         <select ref={node => select = node}
                 value={widget.widgetType}
                 onChange={e => {
-                  dispatch(setWidgetType(widget._id, select.value))
+                  setWidgetType(widget._id, select.value)
                 }}>
           <option>Heading</option>
           <option>Paragraph</option>
@@ -31,7 +33,7 @@ const Widget = ({widget, dispatch}) => {
           <option>iFrame</option>
         </select>
         <button onClick={() => {
-          dispatch(deleteWidget(widget._id))
+          deleteWidget(widget._id)
         }}>
           Delete
         </button>
@@ -50,4 +52,22 @@ const Widget = ({widget, dispatch}) => {
       </li>
   )
 }
+
+let serverBaseUrl = 'https://wbdv-generic-server.herokuapp.com/api/ccf/widgets'
+
+const dispatchToPropertyMapper = (dispatch) => {
+  return {
+    deleteWidget: (id) => {
+      return axios.delete(`${serverBaseUrl}/${id}`
+      ).then(() => axios.get(serverBaseUrl))
+      .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
+    },
+    moveUp: (widget) => dispatch(moveUp(widget)),
+    toggleEditing: (id, isEditing) => dispatch(toggleEditing(id, isEditing)),
+    setWidgetType: (id, type) => dispatch(setWidgetType(id, type))
+  }
+}
+
+const Widget = connect(null, dispatchToPropertyMapper)(WidgetComponent)
+
 export default Widget
