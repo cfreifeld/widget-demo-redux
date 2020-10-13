@@ -1,5 +1,5 @@
 import React from 'react'
-import {moveUp, setWidgetType, toggleEditing} from "../actions";
+import {deleteWidget, moveUp, setWidgetType, toggleEditing} from "../actions";
 import RawTextWidget from "./RawTextWidget";
 import axios from "axios";
 import {connect} from "react-redux";
@@ -57,11 +57,12 @@ let serverBaseUrl = 'https://wbdv-generic-server.herokuapp.com/api/ccf/widgets'
 
 const dispatchToPropertyMapper = (dispatch) => {
   return {
-    deleteWidget: (id) => {
-      return axios.delete(`${serverBaseUrl}/${id}`
-      ).then(() => axios.get(serverBaseUrl))
-      .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
-    },
+    deleteWidget: (id) => deleteWidget(id, dispatch),
+    // deleteWidget: (id) => {
+    //   return axios.delete(`${serverBaseUrl}/${id}`
+    //   ).then(() => axios.get(serverBaseUrl))
+    //   .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
+    // },
     moveUp: (widget) => dispatch(moveUp(widget)),
     toggleEditing: (id, isEditing) => dispatch(toggleEditing(id, isEditing)),
     setWidgetType: (id, type) => dispatch(setWidgetType(id, type))
