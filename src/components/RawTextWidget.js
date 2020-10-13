@@ -10,7 +10,7 @@ const RawTextWidgetComponent = ({widget, dispatch}) => {
         <textarea ref={node => textarea = node}
                   value={widget.rawtext}
                   onChange={e => {
-                    dispatch(setTextWidget(widget.id,
+                    dispatch(setTextWidget(widget._id,
                         textarea.value))
                     preview.innerHTML = textarea.value
                   }}/>

@@ -15,13 +15,13 @@ const Widget = ({widget, dispatch}) => {
                  type="checkbox"
                  value={widget.editing}
                  onChange={e => {
-                   dispatch(toggleEditing(widget.id, editing.checked))}}
+                   dispatch(toggleEditing(widget._id, editing.checked))}}
                  checked={widget.editing}/> Editing
         </label>
         <select ref={node => select = node}
                 value={widget.widgetType}
                 onChange={e => {
-                  dispatch(setWidgetType(widget.id, select.value))
+                  dispatch(setWidgetType(widget._id, select.value))
                 }}>
           <option>Heading</option>
           <option>Paragraph</option>
@@ -31,7 +31,7 @@ const Widget = ({widget, dispatch}) => {
           <option>iFrame</option>
         </select>
         <button onClick={() => {
-          dispatch(deleteWidget(widget.id))
+          dispatch(deleteWidget(widget._id))
         }}>
           Delete
         </button>
