@@ -3,15 +3,15 @@ import Widget from "../components/Widget";
 import {connect} from "react-redux";
 
 const WidgetComponent = connect()(Widget)
-const WidgetList = ({ widgets }) => (
+const WidgetList = ({widgets}) => (
     <ul>
       {widgets.map(widget =>
           <WidgetComponent key={widget._id}
-                  widget={widget}/>)}
+                           widget={widget}/>)}
     </ul>)
 
 const mapStateToProps = state => ({
-    widgets: state.widgets
+  widgets: state.widgets
 })
 
 
