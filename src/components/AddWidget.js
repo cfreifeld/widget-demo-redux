@@ -26,7 +26,7 @@ const dispatchToPropertyMapper = (dispatch) => {
             text: text,
             editing: false
           }).then(() => axios.get(serverBaseUrl))
-      .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data})
+      .then(resp => dispatch({type: 'CREATE_WIDGET', widgets: resp.data})
       )
     }
   }

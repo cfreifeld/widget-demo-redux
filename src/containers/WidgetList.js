@@ -14,8 +14,6 @@ const mapStateToProps = state => ({
   widgets: state.widgets
 })
 
-
-
 const WidgetListContainer = connect(mapStateToProps)(WidgetList)
 
 export default WidgetListContainer

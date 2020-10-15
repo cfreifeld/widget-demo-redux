@@ -10,7 +10,7 @@ const WidgetComponent = ({widget, deleteWidget, moveUp, toggleEditing, setWidget
       <li>{widget.text}
         <button onClick={() => {
           moveUp(widget)
-        }}>^
+        }}>&uArr;
         </button>
         <label>
           <input ref={node => editing = node}
@@ -23,7 +23,8 @@ const WidgetComponent = ({widget, deleteWidget, moveUp, toggleEditing, setWidget
         <select ref={node => select = node}
                 value={widget.widgetType}
                 onChange={e => {
-                  setWidgetType(widget._id, select.value)
+                  widget.widgetType = select.value
+                  setWidgetType(widget)
                 }}>
           <option>Heading</option>
           <option>Paragraph</option>
@@ -65,7 +66,8 @@ const dispatchToPropertyMapper = (dispatch) => {
     // },
     moveUp: (widget) => dispatch(moveUp(widget)),
     toggleEditing: (id, isEditing) => dispatch(toggleEditing(id, isEditing)),
-    setWidgetType: (id, type) => dispatch(setWidgetType(id, type))
+    //setWidgetType: (id, type) => dispatch(setWidgetType(id, type))
+    setWidgetType: (widget) => setWidgetType(widget, dispatch)
   }
 }
 

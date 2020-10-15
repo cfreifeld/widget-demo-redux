@@ -41,11 +41,15 @@ export const moveUp = widget => {
     type: 'MOVE_UP', widget: widget
   }
 }
-export const setWidgetType = (id, widgetType) => {
-  return {
-    type: 'SET_WIDGET_TYPE',
-    widgetType: widgetType, _id: id
-  }
+export const setWidgetType = (widget, dispatch) => {
+  return axios.put(`${serverBaseUrl}/${widget._id}`, widget)
+  .then(() => axios.get(serverBaseUrl))
+  .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
+
+  // return {
+  //   type: 'SET_WIDGET_TYPE',
+  //   widgetType: widgetType, _id: id
+  // }
 }
 export const toggleEditing = (id, checked) => {
   return {
