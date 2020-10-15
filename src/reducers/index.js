@@ -1,3 +1,4 @@
+
 const widgets = (state = [], action) => {
   let index, newState
   switch (action.type) {
@@ -9,12 +10,6 @@ const widgets = (state = [], action) => {
       index = state.indexOf(action.widget);
       state.move(index, index - 1);
       return state.splice(0);
-    case 'SET_WIDGET_TYPE':
-      newState = JSON.parse(JSON.stringify(state))
-      index = newState.findIndex(function (widget) {
-        return widget._id === action._id})
-      newState[index].widgetType = action.widgetType
-      return newState
     case 'TOGGLE_EDITING':
       newState = JSON.parse(JSON.stringify(state))
       index = newState.findIndex(

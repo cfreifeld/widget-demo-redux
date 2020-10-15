@@ -10,32 +10,8 @@ export const deleteWidget = (id, dispatch) => {
     return axios.delete(`${serverBaseUrl}/${id}`)
     .then(() => axios.get(serverBaseUrl))
     .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
-  // return {
-  //   type: 'DELETE_WIDGET', id: id
-  // }
 }
-let nextWidgetId = 0
-// export const addWidget = (text) => {
-//   // return (dispatch) => {
-//   //   return axios.post(
-//   //       serverBaseUrl,
-//   //       {
-//   //         //type: 'ADD_WIDGET',
-//   //         //id: nextWidgetId++,
-//   //         text: text,
-//   //         editing: false
-//   //       }).then(
-//   //       () => axios.get(
-//   //           serverBaseUrl))
-//   //       .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data})
-//   //   )
-//     return {
-//      type: 'ADD_WIDGET',
-//      id: nextWidgetId++,
-//      text: text
-//     }
-//   //}
-// }
+
 export const moveUp = widget => {
   return {
     type: 'MOVE_UP', widget: widget
@@ -45,11 +21,6 @@ export const setWidgetType = (widget, dispatch) => {
   return axios.put(`${serverBaseUrl}/${widget._id}`, widget)
   .then(() => axios.get(serverBaseUrl))
   .then(resp => dispatch({type: 'SERVER_RESPONSE', widgets: resp.data}))
-
-  // return {
-  //   type: 'SET_WIDGET_TYPE',
-  //   widgetType: widgetType, _id: id
-  // }
 }
 export const toggleEditing = (id, checked) => {
   return {
