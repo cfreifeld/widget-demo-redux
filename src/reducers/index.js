@@ -1,5 +1,5 @@
 
-const widgets = (state = [], action) => {
+const widgetReducer = (state = [], action) => {
   let index, newState
   switch (action.type) {
     case 'CREATE_WIDGET':
@@ -30,4 +30,15 @@ const widgets = (state = [], action) => {
       return state
   }
 }
-export default widgets
+
+export const otherReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'CREATE_WIDGET':
+      console.log("create widget action handled in otherReducer")
+      return state
+    default:
+      return state
+  }
+}
+
+export default widgetReducer
